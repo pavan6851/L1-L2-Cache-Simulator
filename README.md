@@ -6,11 +6,17 @@ This project models a two-level cache system (L1 and L2), using set-associative 
 **Features**
 
 Configurable cache parameters (size, associativity, block size)
+
 Set-associative L1 and L2 caches
+
 FIFO replacement policy
+
 Cache hit/miss tracking
+
 AMAT (Average Memory Access Time) calculation
+
 Reads memory traces from a hex-formatted file
+
 
 **File Structure**
 
