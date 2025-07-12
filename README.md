@@ -42,7 +42,7 @@ This project models a two-level cache system (L1 and L2), using set-associative 
 
     ./cache_sim trace.txt 32768 4 262144 8 64
 
-trace.txt: File with memory access traces
+•   trace.txt: File with memory access traces
 
 •	32768: L1 cache size in bytes (32KB)
 
