@@ -47,7 +47,7 @@ bool Cache::access(unsigned int address, int globalTime) {
     return false;
 }
 
-void Cache::printStats(const std::string& label) const {
+void Cache::printStats(const string& label) const {
     int total = hits + misses;
     double hitRate = (total > 0) ? (static_cast<double>(hits) / total * 100.0) : 0.0;
 
