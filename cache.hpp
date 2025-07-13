@@ -14,7 +14,7 @@ class Cache {
 public:
     Cache(int cacheSize, int blockSize, int associativity);
     bool access(unsigned int address, int globalTime); // returns true if hit
-    void printStats(const std::string& label) const;
+    void printStats(const string& label) const;
 
 
     // ✅ Move these to public so main.cpp can access them
@@ -28,7 +28,7 @@ private:
     int numSets;
     int indexBits, offsetBits;
 
-    std::vector<std::deque<CacheBlock>> sets;
+    vector<deque<CacheBlock>> sets;
 
     int hits = 0;
     int misses = 0;
