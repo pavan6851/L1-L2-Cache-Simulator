@@ -7,7 +7,7 @@
 using namespace std;
 
 struct MemoryAccess {
-    char operation;         // 'R' or 'W'
+    char operation;         // Read or write
     unsigned int address;   // parsed hex to int
 };
 
@@ -23,18 +23,18 @@ int main(int argc, char* argv[])
     int L1_SIZE, L1_ASSOC, L2_SIZE, L2_ASSOC, BLOCK_SIZE;
 
     try {
-        L1_SIZE = std::stoi(argv[2]);
-        L1_ASSOC = std::stoi(argv[3]);
-        L2_SIZE = std::stoi(argv[4]);
-        L2_ASSOC = std::stoi(argv[5]);
-        BLOCK_SIZE = std::stoi(argv[6]);
-    } catch (std::exception& e) {
-        std::cerr << "Error: All cache parameters must be valid integers.\n";
+        L1_SIZE = stoi(argv[2]);
+        L1_ASSOC = stoi(argv[3]);
+        L2_SIZE = stoi(argv[4]);
+        L2_ASSOC = stoi(argv[5]);
+        BLOCK_SIZE = stoi(argv[6]);
+    } catch (exception& e) {
+        cerr << "Error: All cache parameters must be valid integers.\n";
         return 1;
     }
 
     if (L1_SIZE <= 0 || L1_ASSOC <= 0 || L2_SIZE <= 0 || L2_ASSOC <= 0 || BLOCK_SIZE <= 0) {
-        std::cerr << "Error: All sizes and associativity must be positive non-zero values.\n";
+        cerr << "Error: All sizes and associativity must be positive non-zero values.\n";
         return 1;
     }
 
@@ -42,12 +42,12 @@ int main(int argc, char* argv[])
     int l2_blocks = L2_SIZE / BLOCK_SIZE;
 
     if (L1_ASSOC > l1_blocks) {
-        std::cerr << "Error: L1 associativity exceeds number of blocks in L1.\n";
+        cerr << "Error: L1 associativity exceeds number of blocks in L1.\n";
         return 1;
     }
 
     if (L2_ASSOC > l2_blocks) {
-        std::cerr << "Error: L2 associativity exceeds number of blocks in L2.\n";
+        cerr << "Error: L2 associativity exceeds number of blocks in L2.\n";
         return 1;
     }
 
@@ -80,7 +80,6 @@ ifstream infile(traceFile);
     Cache l1(L1_SIZE, BLOCK_SIZE, L1_ASSOC);
     Cache l2(L2_SIZE, BLOCK_SIZE, L2_ASSOC);
 
-
     int time = 0;
     for (const auto& access : accesses) {
         bool l1_hit = l1.access(access.address, time++);
@@ -107,7 +106,6 @@ ifstream infile(traceFile);
     }
 
     l1.printStats("L1");
-    cout << "\nL2 Cache Stats:\n";
     l2.printStats("L2");
 
     // Constants for timing (in CPU cycles)
@@ -134,7 +132,6 @@ cout << "AMAT = " << L1_HIT_TIME << " + "
      << l1MissRate << " x (" << L2_HIT_TIME << " + " 
      << l2MissRate << " x " << MEM_TIME << ")"
      << " = " << amat << " cycles\n";
-
 
     return 0;
 }
